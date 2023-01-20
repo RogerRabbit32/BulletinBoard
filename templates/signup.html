@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <h2>Sign up Form</h2>
+    <h2>Зарегистрироваться</h2>
 <form method="post">
   {% csrf_token %}
   {% for field in form %}
@@ -18,5 +18,5 @@
       {% endfor %}
     </p>
   {% endfor %}
-  <button type="submit">Sign up</button>
+  <button type="submit">Register</button>
 </form>

@@ -1,6 +1,4 @@
-from django.contrib.auth.models import User
-from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from random import randint
@@ -30,26 +28,19 @@ def signup_view(request):
     return render(request, 'signup.html', {'form': form})
 
 
-def awaiting_confirmation(request):
-    return render(request, 'please_confirm.html')
-
-
 def account_confirmation(request):
     form = ConfirmationForm(request.POST)
     if form.is_valid():
-        #username = form.cleaned_data.get('username')
-        #password = form.cleaned_data.get('password1')
-        #user = authenticate(username=username, password=password)
         code = form.cleaned_data['code']
-        code_obj = Code.objects.get(number=code)
-        if code_obj:
+        if len(Code.objects.filter(number=code)) != 0:
+            code_obj = Code.objects.get(number=code)
             user = code_obj.user
             user.is_active = True
             user.save()
             login(request, user)
+            return redirect('home')
+        else:
+            form = ConfirmationForm()
+    else:
+        form = ConfirmationForm()
     return render(request, 'account_confirmation.html', {'form': form})
-
-
-def logout_view(request):
-    logout(request)
-    return redirect('/')
