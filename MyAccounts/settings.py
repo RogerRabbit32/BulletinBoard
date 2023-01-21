@@ -147,8 +147,8 @@ CELERY_RESULT_SERIALIZER = 'json'
 #messaging
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'levinkirill'
-EMAIL_HOST_PASSWORD = '909961Levin'
+EMAIL_HOST_USER = '*****'
+EMAIL_HOST_PASSWORD = '*****'
 EMAIL_USE_SSL = True
 
 #log_in / log_out
